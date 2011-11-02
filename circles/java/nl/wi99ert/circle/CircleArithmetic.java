@@ -17,9 +17,9 @@ public class CircleArithmetic {
     }
     
     public static CircleCombination add(CircleCombination combination, Circle circle) {
-        List<Circle> circles = getSortedCircles(combination, circle);
-        return new CircleCombination(new Circle(circles.get(0), circles.get(1)), 
-                                     circles.get(2));
+        SortedCircles sortedCircles = getSortedCircles(combination, circle);
+        return new CircleCombination(new Circle(sortedCircles.getSmallCircle(), sortedCircles.getNormalCircle()), 
+                                     sortedCircles.getBigCircle());
     }
 
     public static Circle subtract(Circle bigCircle, Circle smallCircle) {
@@ -27,16 +27,17 @@ public class CircleArithmetic {
     }
     
     public static CircleCombination subtract(CircleCombination combination, Circle circle) {
-        List<Circle> circles = getSortedCircles(combination, circle);
-        if (circles.get(2) == circle) {
-            return new CircleCombination(doSubtraction(circles.get(2),
-                                                       doSubtraction(circles.get(0), circles.get(1))));
+        SortedCircles sortedCircles = getSortedCircles(combination, circle);
+        if (sortedCircles.getBigCircle() == circle) {
+            return new CircleCombination(doSubtraction(sortedCircles.getBigCircle(),
+                                                       doSubtraction(sortedCircles.getSmallCircle(), 
+                                                                     sortedCircles.getNormalCircle())));
         }
-        return new CircleCombination(doSubtraction(circles.get(2), circles.get(0)),
-                                     circles.get(1));
+        return new CircleCombination(doSubtraction(sortedCircles.getBigCircle(), sortedCircles.getSmallCircle()),
+                                     sortedCircles.getNormalCircle());
     }
     
-    private static List<Circle> getSortedCircles(CircleCombination combination,
+    private static SortedCircles getSortedCircles(CircleCombination combination,
             Circle circle) {
         List<Circle> circles = Lists.newArrayList();
         circles.addAll(combination.getCircles());
@@ -48,11 +49,36 @@ public class CircleArithmetic {
                 return circleA.getRadius() - circleB.getRadius();
             }
         });
-        return circles;
+        return new SortedCircles(circles);
     }
     
     private static Circle doSubtraction(Circle bigCircle, Circle smallCircle) {
         return new Circle(Math.abs(bigCircle.getRadius() - smallCircle.getRadius()));
+    }
+    
+    private static class SortedCircles {
+        
+        private final Circle smallCircle;
+        private final Circle normalCircle;
+        private final Circle bigCircle;
+
+        public SortedCircles(List<Circle> circles) {
+            this.smallCircle = circles.get(0);
+            this.normalCircle = circles.get(1);
+            this.bigCircle = circles.get(2);
+        }
+
+        public Circle getSmallCircle() {
+            return smallCircle;
+        }
+
+        public Circle getNormalCircle() {
+            return normalCircle;
+        }
+
+        public Circle getBigCircle() {
+            return bigCircle;
+        }
     }
 
 }
