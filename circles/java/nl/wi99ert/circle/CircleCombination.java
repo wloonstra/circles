@@ -6,12 +6,22 @@ import java.util.Collection;
 
 public class CircleCombination {
     
-    private Circle smallCircle;
-    private Circle bigCircle;
+    private final Circle smallCircle;
+    private final Circle bigCircle;
     
-    public CircleCombination(Circle smallCircle, Circle bigCircle) {
-        this.smallCircle = smallCircle;
-        this.bigCircle = bigCircle;
+    public CircleCombination(Circle circleA, Circle circleB) {
+        if (circleA.getRadius() < circleB.getRadius()) {
+            this.smallCircle = circleA;
+            this.bigCircle = circleB;
+        } else {
+            this.smallCircle = circleB;
+            this.bigCircle = circleA;
+        }
+    }
+    
+    public CircleCombination(Circle circle) {
+        this.bigCircle = circle;
+        this.smallCircle = new Circle(0);
     }
     
     @Override

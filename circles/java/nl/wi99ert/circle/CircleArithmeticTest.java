@@ -56,6 +56,22 @@ public class CircleArithmeticTest {
         Circle actual = CircleArithmetic.subtract(smallCircle, bigCircle);
         assertThat(actual.getRadius(), is(BIG - SMALL));
     }
+    
+    @Test
+    public void subtractSmallestFromCircleCombination() throws Exception {
+        CircleCombination combi = CircleArithmetic.add(normalCircle, bigCircle);
+        CircleCombination actual = CircleArithmetic.subtract(combi, smallCircle);
+        
+        assertSmallAndBig(actual, NORMAL, BIG - SMALL);
+    }
+    
+    @Test
+    public void subtractBiggestFromCircleCombination() throws Exception {
+        CircleCombination combi = CircleArithmetic.add(smallCircle, normalCircle);
+        CircleCombination actual = CircleArithmetic.subtract(combi, bigCircle);
+        
+        assertSmallAndBig(actual, 0, BIG - (NORMAL - SMALL));
+    }
 
     private void assertSmallAndBig(CircleCombination actual, int small, int big) {
         assertThat(actual.getSmallCircle().getRadius(), is(small));
