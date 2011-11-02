@@ -5,3 +5,5 @@
 */*.settings
 *.project
 */*.project
+*.classpath
+*/*.classpath
