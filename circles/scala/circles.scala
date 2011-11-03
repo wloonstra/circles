@@ -7,11 +7,17 @@ package nl.wi99ert {
         override def toString() = bigCircle.toString + " and attached to it another " + smallCircle.toString   
     }
     
+    object CircleCombination {
+        def from(circle1: Circle, circle2: Circle) = {
+            var circles = List(circle1, circle2)
+            circles = circles.sortWith((s, t) => s.radius < t.radius)
+            new CircleCombination(circles(0), circles(1))
+        }
+    }
+    
     object CircleArithmetic {
-        def add(circle1: Circle, circle2: Circle): CircleCombination = {
-//            var circles = List(circle1, circle2)
-//            circles = circles.sortWith((s, t) => s.radius < t.radius)
-            new CircleCombination(circle1, circle2)
+        def add(circle1: Circle, circle2: Circle) = {
+            CircleCombination.from(circle1, circle2)
         }
     }
 }

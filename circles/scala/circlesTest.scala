@@ -12,8 +12,17 @@ class CirclesTest extends FunSuite {
  
     test("adds two circles, smallest first") {
         val actual = CircleArithmetic.add(smallCircle, bigCircle)
-        assert(actual.bigCircle.radius === big)
+        assertSmallAndBig(actual, small, big)
+    }
+    
+    test("adds two circles, biggest first") {
+        val actual = CircleArithmetic.add(bigCircle, smallCircle)
+        assertSmallAndBig(actual, small, big)
+    }
+    
+    def assertSmallAndBig(actual: CircleCombination, small: Int, big: Int) = {
         assert(actual.smallCircle.radius === small)   
-  }
+        assert(actual.bigCircle.radius === big)
+    }
  
 }
