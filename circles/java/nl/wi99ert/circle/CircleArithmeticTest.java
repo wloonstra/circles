@@ -27,6 +27,15 @@ public class CircleArithmeticTest {
     }
     
     /**
+     * [big] + [small] = [small][big]
+     */
+    @Test
+    public void addsTwoCirclesTogetherBigFirst() throws Exception {
+        CircleCombination actual = CircleArithmetic.add(bigCircle, smallCircle);
+        assertSmallAndBig(actual, SMALL, BIG);
+    }
+    
+    /**
      * [normal][big] + [small] = [small + normal][big]
      */
     @Test

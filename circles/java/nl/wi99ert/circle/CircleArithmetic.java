@@ -43,12 +43,6 @@ public class CircleArithmetic {
         circles.addAll(combination.getCircles());
         circles.add(circle);
         
-        Collections.sort(circles, new Comparator<Circle>(){
-            @Override
-            public int compare(Circle circleA, Circle circleB) {
-                return circleA.getRadius() - circleB.getRadius();
-            }
-        });
         return new SortedCircles(circles);
     }
     
@@ -63,6 +57,13 @@ public class CircleArithmetic {
         private final Circle bigCircle;
 
         public SortedCircles(List<Circle> circles) {
+            Collections.sort(circles, new Comparator<Circle>(){
+                @Override
+                public int compare(Circle circleA, Circle circleB) {
+                    return circleA.getRadius() - circleB.getRadius();
+                }
+            });
+            
             this.smallCircle = circles.get(0);
             this.normalCircle = circles.get(1);
             this.bigCircle = circles.get(2);
