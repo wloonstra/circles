@@ -1,35 +1,17 @@
-class Circle(val radius: Int) {
-    var attachedCircle: Circle = null
+package nl.wi99ert {
+    class Circle(val radius: Int) {
+        override def toString() = "circle with radius " + radius
+    }
     
-    def show() = {
-        var message = this.toString;
-        if (attachedCircle != null) {
-            message += " and attached to it another " + attachedCircle
+    class CircleCombination(val smallCircle: Circle, val bigCircle: Circle) {       
+        override def toString() = bigCircle.toString + " and attached to it another " + smallCircle.toString   
+    }
+    
+    object CircleArithmetic {
+        def add(circle1: Circle, circle2: Circle): CircleCombination = {
+//            var circles = List(circle1, circle2)
+//            circles = circles.sortWith((s, t) => s.radius < t.radius)
+            new CircleCombination(circle1, circle2)
         }
-        println(message)
-    }
-    
-    def attachTo(circle: Circle) = {
-        attachedCircle = circle
-    }
-    
-    override def toString() = "circle with radius " + radius
-    
-}
-
-object Circle {
-    def bringTogether(circle1: Circle, circle2: Circle) = {
-        var circles = List(circle1, circle2)
-        circles = circles.sortWith((s, t) => s.radius > t.radius)
-        circles(0).attachTo(circles(1))
-        circles(0)
     }
 }
-
-val smallCircle = new Circle(4)
-smallCircle.show
-val bigCircle = new Circle(12)
-bigCircle.show
-
-val circleWithRelation = Circle.bringTogether(smallCircle, bigCircle)
-circleWithRelation.show
