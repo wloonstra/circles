@@ -14,9 +14,11 @@ package nl.wi99ert {
         }
         
         def from(circle1: Circle, circle2: Circle) = {
-            var circles = List(circle1, circle2)
-            circles = circles.sortWith((s, t) => s.radius < t.radius)
-            new CircleCombination(circles(0), circles(1))
+            if (circle1.radius < circle2.radius) {
+                new CircleCombination(circle1, circle2)
+            } else {  
+                new CircleCombination(circle2, circle1)
+            }
         }
     }
     
