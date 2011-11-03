@@ -1,14 +1,12 @@
 package nl.wi99ert {
     class Circle(val radius: Int) {
+        
         def this(circle1: Circle, circle2: Circle) {
             this(circle1.radius + circle2.radius)
         }
-        override def toString() = "circle with radius " + radius
     }
     
-    class CircleCombination(val smallCircle: Circle, val bigCircle: Circle) {       
-        override def toString() = bigCircle.toString + " and attached to it another " + smallCircle.toString   
-    }
+    class CircleCombination(val smallCircle: Circle, val bigCircle: Circle) { }
     
     object CircleCombination {
         def from(circle: Circle) = {
@@ -22,15 +20,30 @@ package nl.wi99ert {
         }
     }
     
-    object CircleArithmetic {
+    class SortedCircles(val smallCircle: Circle,
+                        val normalCircle: Circle,
+                        val bigCircle: Circle) { }
+    
+    object SortedCircles {
+        def from(circleCombination: CircleCombination, circle: Circle) = {
+            var sortedCircles = List(circleCombination.smallCircle,
+                                     circleCombination.bigCircle, 
+                                     circle)
+            sortedCircles = sortedCircles.sortWith((s, t) => s.radius < t.radius)
+            new SortedCircles(sortedCircles(0), sortedCircles(1), sortedCircles(2))
+        }
+    }
+                        
+    case object CircleArithmetic {
         def add(circle1: Circle, circle2: Circle) = {
             CircleCombination.from(circle1, circle2)
         }
         
         def add(circleCombination: CircleCombination, circle: Circle) = {
-            val circles = getSortedCircles(circleCombination, circle)
-            CircleCombination.from(new Circle(circles(0), circles(1)), 
-                                   circles(2))
+            val sortedCircles = SortedCircles.from(circleCombination, circle)
+            CircleCombination.from(new Circle(sortedCircles.smallCircle, 
+                                              sortedCircles.normalCircle), 
+                                   sortedCircles.bigCircle)
         }
         
         def subtract(circle1: Circle, circle2: Circle) = {
@@ -38,14 +51,16 @@ package nl.wi99ert {
         }
         
         def subtract(circleCombination: CircleCombination, circle: Circle): CircleCombination = {
-            val circles = getSortedCircles(circleCombination, circle)
+            val sortedCircles = SortedCircles.from(circleCombination, circle)
             
-            if (circles(2) == circle) {
-                return CircleCombination.from(doSubtraction(doSubtraction(circles(1), circles(0)),
-                                              circles(2)))
+            if (sortedCircles.bigCircle == circle) {
+                return CircleCombination.from(doSubtraction(doSubtraction(sortedCircles.smallCircle,
+                                                                          sortedCircles.normalCircle),
+                                              sortedCircles.bigCircle))
             } else {
-                return CircleCombination.from(doSubtraction(circles(0), circles(2)),
-                                              circles(1)) 
+                return CircleCombination.from(doSubtraction(sortedCircles.smallCircle,
+                                                            sortedCircles.bigCircle),
+                                              sortedCircles.normalCircle) 
             }
         }
         
@@ -53,12 +68,6 @@ package nl.wi99ert {
             new Circle(math.abs(circle1.radius - circle2.radius))
         }
         
-        private def getSortedCircles(circleCombination: CircleCombination, circle: Circle) = { 
-            var circles = List(circleCombination.smallCircle,
-                               circleCombination.bigCircle, 
-                               circle)
-            circles.sortWith((s, t) => s.radius < t.radius)
-        }
     }
     
 
