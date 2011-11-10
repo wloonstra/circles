@@ -37,3 +37,8 @@ def addToCombination(circleCombination, circle)
     CircleCombination.new(Circle.new(radiusForFirstCircle.to_i),
                           radii[2])
 end
+
+def subtract(circleA, circleB)
+    newRadius = (circleA.radius.to_i - circleB.radius.to_i).abs
+    Circle.new(newRadius.to_i)
+end

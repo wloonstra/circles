@@ -28,6 +28,13 @@ When /^I add circle (\w+) to circleCombination (\w+)$/ do |circle, circleCombina
     instance_variable_set("@result", combi)
 end
 
+When /^I subtract circle (\w+) from circle (\w+)$/ do |big, small|
+    bigCircle = instance_variable_get("@#{big}")
+    smallCircle = instance_variable_get("@#{small}")
+    result = subtract(bigCircle, smallCircle)
+    instance_variable_set("@result", result)
+end
+
 begin
     require 'rubygems'
     require 'matchy'
@@ -42,4 +49,10 @@ begin
         actual.smallCircle.radius.to_i.should == radiusA.to_i
         actual.bigCircle.radius.to_i.should == radiusB.to_i
     end
+
+    Then /^I can assert that the result has radius (\d+)$/ do |radius|
+        actual = instance_variable_get("@result")
+        actual.radius.to_i.should == radius.to_i
+    end
+
 end
