@@ -14,7 +14,7 @@ class CircleCombination
     attr_accessor :smallCircle, :bigCircle
     
     def initialize(circleA, circleB)
-        if circleA.radius.to_i < circleB.radius.to_i
+        if circleA.radius < circleB.radius
             @smallCircle = circleA
             @bigCircle = circleB
         else
@@ -32,13 +32,13 @@ def addToCombination(circleCombination, circle)
     radii = [circleCombination.smallCircle, 
              circleCombination.bigCircle,
              circle]
-    radii.sort! {|a,b| a.radius.to_i <=> b.radius.to_i }
-    radiusForFirstCircle = radii[0].radius.to_i + radii[1].radius.to_i
-    CircleCombination.new(Circle.new(radiusForFirstCircle.to_i),
+    radii.sort! {|a,b| a.radius <=> b.radius }
+    radiusForFirstCircle = radii[0].radius + radii[1].radius
+    CircleCombination.new(Circle.new(radiusForFirstCircle),
                           radii[2])
 end
 
 def subtract(circleA, circleB)
-    newRadius = (circleA.radius.to_i - circleB.radius.to_i).abs
-    Circle.new(newRadius.to_i)
+    newRadius = (circleA.radius - circleB.radius).abs
+    Circle.new(newRadius)
 end
