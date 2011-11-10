@@ -8,16 +8,6 @@ class Circle
     def to_s
         "circle with radius " + radius.to_s
     end
-    
-    def <=> other_circle
-        if self.radius.to_i < other_circle.radius.to_i
-            return -1
-        elsif self.radius.to_i > other_circle.radius.to_i
-            return 1
-        else
-            return 0
-        end
-    end
 end
 
 class CircleCombination
