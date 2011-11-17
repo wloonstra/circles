@@ -58,11 +58,4 @@ class CirclesTest extends FunSuite {
         assert(actual.smallCircle.radius === small)   
         assert(actual.bigCircle.radius === big)
     }
-    
-    
-    
-    
-//    public void subtractSmallestFromCircleCombination() throws Exception {
-//    public void subtractBiggestFromCircleCombination() throws Exception {
- 
 }

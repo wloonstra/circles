@@ -1,6 +1,5 @@
 package nl.wi99ert {
     class Circle(val radius: Int) {
-        
         def this(circle1: Circle, circle2: Circle) {
             this(circle1.radius + circle2.radius)
         }
@@ -69,8 +68,5 @@ package nl.wi99ert {
         private def doSubtraction(circle1: Circle, circle2: Circle) = {
             new Circle(math.abs(circle1.radius - circle2.radius))
         }
-        
     }
-    
-
 }
