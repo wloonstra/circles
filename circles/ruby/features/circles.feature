@@ -44,3 +44,15 @@ Feature: Circles
     And a circle B with radius 8
     When I subtract circle A from circle B
     Then I can assert that the result has radius 42
+
+  Scenario: subtracting a small circle from circleCombination
+    Given a circleCombination C with radius 8 and 50
+    And a circle S with radius 1
+    When I subtract circle S from circleCombination C
+    Then the combination has radius 8 and 49
+
+  Scenario: subtracting a big circle from circleCombination
+    Given a circleCombination C with radius 1 and 8
+    And a circle B with radius 50
+    When I subtract circle B from circleCombination C
+    Then I can assert that the result has radius 43

@@ -35,6 +35,13 @@ When /^I subtract circle (\w+) from circle (\w+)$/ do |big, small|
     instance_variable_set("@result", result)
 end
 
+When /^I subtract circle (\w+) from circleCombination (\w+)$/ do |circle, circleCombination|
+    circle = instance_variable_get("@#{circle}")
+    circleCombination = instance_variable_get("@#{circleCombination}")
+    result = subtractFromCombination(circleCombination, circle)
+    instance_variable_set("@result", result)
+end
+
 begin
     require 'rubygems'
     require 'matchy'
