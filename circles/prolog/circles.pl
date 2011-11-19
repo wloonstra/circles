@@ -2,29 +2,36 @@ circle(big, 50).
 circle(medium, 8).
 circle(small, 1).
 
-circle(medium_small, 9).
+circle(small_medium, 9).
 
 parent_circle(X, Y) :- 
     circle(X, A),
     circle(Y, B),
     A > B.
 
-order(X, Y, Z) :-
-    circle(X, A),
-    circle(Y, B),
-    circle(Z, C),
-    A > B,
-    B > C.    
-    
-add(Input, Output) :- 
+add(Input, Result) :- 
     Input = ((C1, C2), S),
 
-    parent_circle(C2, C1),
+    order([C1, C2, S], [Small, Medium, Big]), 
 
-    circle(C1, Radius1),
-    circle(S, RadiusS),
-    NewRadius is Radius1 + RadiusS,
+    circle(Small, RadiusSmall),
+    circle(Medium, RadiusMedium),
+    NewRadius is RadiusSmall + RadiusMedium,
     circle(NewCircle, NewRadius),
 
-    parent_circle(C2, NewCircle),
-    Output = (NewCircle, C2).
+    parent_circle(Big, NewCircle),
+    Result = (NewCircle, Big).
+
+order(Input, Sorted) :-
+    member(P, Input),
+    member(Q, Input),
+    member(R, Input),
+   
+    circle(P, RadiusP),
+    circle(Q, RadiusQ),
+    circle(R, RadiusR),
+    RadiusP < RadiusQ,
+    RadiusQ < RadiusR,
+    
+    Sorted = [P, Q, R].
+
