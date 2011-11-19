@@ -9,3 +9,4 @@
 */*.classpath
 circles/java/.idea/*
 circles/java/*.iml
+circles/scala/*.iml
