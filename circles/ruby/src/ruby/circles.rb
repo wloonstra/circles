@@ -4,10 +4,6 @@ class Circle
     def initialize(radius)
         @radius = radius
     end
-    
-    def to_s
-        "circle with radius " + radius.to_s
-    end
 end
 
 class CircleCombination
