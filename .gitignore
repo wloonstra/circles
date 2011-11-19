@@ -7,3 +7,5 @@
 */*.project
 *.classpath
 */*.classpath
+circles/java/.idea/*
+circles/java/*.iml
