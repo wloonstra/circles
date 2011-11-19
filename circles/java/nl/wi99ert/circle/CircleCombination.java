@@ -1,8 +1,8 @@
 package nl.wi99ert.circle;
 
-import static com.google.common.collect.Lists.newArrayList;
-
 import java.util.Collection;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 public class CircleCombination {
     
