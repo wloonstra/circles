@@ -9,13 +9,6 @@ parent_circle(X, Y) :-
     circle(Y, B), 
     A > B.
 
-order(X, Y, Z) :-
-    circle(X, A), 
-    circle(Y, B), 
-    circle(Z, C), 
-    A > B,
-    B > C.    
-    
 add(Input, Output) :-  
     Input = ((C1, C2), S), 
 
