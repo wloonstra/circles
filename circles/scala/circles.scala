@@ -1,4 +1,5 @@
 package nl.wi99ert {
+
     class Circle(val radius: Int) {
         def this(circle1: Circle, circle2: Circle) {
             this(circle1.radius + circle2.radius)
@@ -35,7 +36,7 @@ package nl.wi99ert {
         }
     }
                         
-    case object CircleArithmetic {
+    object CircleArithmetic {
         def add(circle1: Circle, circle2: Circle) = {
             CircleCombination.from(circle1, circle2)
         }
@@ -57,7 +58,7 @@ package nl.wi99ert {
             if (sortedCircles.bigCircle == circle) {
                 return CircleCombination.from(doSubtraction(doSubtraction(sortedCircles.smallCircle,
                                                                           sortedCircles.normalCircle),
-                                              sortedCircles.bigCircle))
+                                                            sortedCircles.bigCircle))
             } else {
                 return CircleCombination.from(doSubtraction(sortedCircles.smallCircle,
                                                             sortedCircles.bigCircle),
